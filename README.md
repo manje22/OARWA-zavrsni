@@ -2,8 +2,6 @@
 
 napravi layout componentu
 u serveru definiraj
--koncekciju s bazom
--model korisnika
 
 -kostur autentifikacije
 
