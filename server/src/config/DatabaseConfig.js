@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 
+const connectDB = async () => {
+  try {
+    await mongoose.connect("mongodb://127.0.0.1:27017/villaDB", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
-mongoose.connect("mongodb://127.0.0.1:27017/villaDB");
-
-
-const connectDB = mongoose.connection;
-
-
-connectDB.on("error", (error) => {
-  console.error("Greška pri spajanju:", error);
-});
-connectDB.once("open", function () {
-  console.log("Spojeni smo na MongoDB bazu");
-});
+    console.log("Spojeni smo na MongoDB bazu");
+  } catch (error) {
+    console.error("Greška pri spajanju:", error);
+    process.exit(1); // Exit process on DB failure
+  }
+};
 
 module.exports = connectDB;
