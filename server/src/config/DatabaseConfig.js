@@ -10,7 +10,6 @@ const connectDB = async () => {
     console.log("Spojeni smo na MongoDB bazu");
   } catch (error) {
     console.error("Greška pri spajanju:", error);
-    process.exit(1); // Exit process on DB failure
   }
 };
 

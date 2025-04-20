@@ -1,11 +1,8 @@
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-const user = require('../models/user');
 
 require('dotenv').config();
 const salt_runde = parseInt(process.env.SALT_RUNDE);
-const key = process.env.SECRET_KEY;
 
 exports.login = async (req, res) => {
   try{
