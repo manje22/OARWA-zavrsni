@@ -1,19 +1,16 @@
 const mongoose = require("mongoose");
 
 
-mongoose.connect(process.env.ADRESA_BAZE, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect("mongodb://127.0.0.1:27017/villaDB");
 
 
-const db = mongoose.connection;
+const connectDB = mongoose.connection;
 
 
-db.on("error", (error) => {
+connectDB.on("error", (error) => {
   console.error("Greška pri spajanju:", error);
 });
-db.once("open", function () {
+connectDB.once("open", function () {
   console.log("Spojeni smo na MongoDB bazu");
 });
 
