@@ -1,6 +1,10 @@
+import MainLayout from "../Layout/MainLayout"
+
 function Home(params) {
     return(
-        <div>Homepage</div>
+        <MainLayout>
+            <div>Homepage</div>
+        </MainLayout>
     )
 }
 

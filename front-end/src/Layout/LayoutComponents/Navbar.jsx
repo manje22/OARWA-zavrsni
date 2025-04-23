@@ -1,12 +1,14 @@
+import { Link } from "react-router";
+
 function NavBar() {
     return(
-        <div>
-            <nav>
-                <p>How to get here</p>
+        <div className="w-full">
+            <nav className="flex flex-row w-full justify-around">
                 <p>Contact us</p>
-                <p>Log in/Register</p>
-                <p>Gallery</p>
-                <p>Make your reservation</p>
+                <Link to={'/login'}>Log in</Link>
+                <Link to={'/registration'}>Register</Link>
+                <Link to={'/gallery'}>Gallery</Link>
+                <Link to={'/new-reservation'}>Make your reservation</Link>
             </nav>
         </div>
     )

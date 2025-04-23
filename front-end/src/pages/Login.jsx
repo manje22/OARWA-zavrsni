@@ -1,6 +1,6 @@
 function Login(params) {
     return(
-        <div>Homepage</div>
+        <div>Log in</div>
     )
 }
 
