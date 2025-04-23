@@ -1,7 +1,7 @@
 import { use, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {HandleChange} from "../utils/forms";
-import axios from "axios";
+import { loginUser } from "../services/AuthServices";
 
 function Login(params) {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ function Login(params) {
     "password":""
   })
 
-// const HandleChangeLogin = (event) =>{ HandleChange(event, formData, setFormData)};
+
 
 function HandleChangeLogin(event) {
   HandleChange(event, formData, setFormData);
@@ -19,15 +19,12 @@ function HandleChangeLogin(event) {
 async function handleSubmit(e) {
   e.preventDefault();
 
-  console.log(formData);
-
-  try {
-    const response = await axios.post('http://localhost:3000/login', formData);
-    console.log(response);
-    console.log("Sve ok");
-    navigate('/newreservation');
-  } catch (error) {
-    console.log(error.message);
+  try{
+    const userData = await loginUser(formData);
+    console.log(userData);
+    navigate("/");
+  }catch(error){
+    console.log(error);
   }
 }
 
@@ -67,7 +64,7 @@ async function handleSubmit(e) {
                 onChange={HandleChangeLogin}
               />
             </div>
-            <button type="submit">Log in</button>
+            <button type="submit">Submit</button>
           </form>
         </div>
 
