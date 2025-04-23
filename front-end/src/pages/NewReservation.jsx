@@ -1,6 +1,6 @@
 function NewReservation(params) {
     return(
-        <div>Homepage</div>
+        <div>New reservation</div>
     )
 }
 

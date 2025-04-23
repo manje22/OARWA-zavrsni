@@ -1,6 +1,6 @@
 function Registration(params) {
     return(
-        <div>Homepage</div>
+        <div>Registration</div>
     )
 }
 

@@ -21,7 +21,7 @@ function App() {
         <Route path='/gallery' element={<Gallery/>}/>
         <Route path='/information' element={<Information/>}/>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/new-reservation' element={<NewReservation/>}/>
+        <Route path='/newreservation' element={<NewReservation/>}/>
         <Route path='/registration' element={<Registration/>}/>
         <Route path='/payment' element={<Payment/>}></Route>
       </Routes>
