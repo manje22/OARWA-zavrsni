@@ -20,9 +20,11 @@ async function handleSubmit(e) {
   e.preventDefault();
 
   try{
-    const userData = await loginUser(formData);
-    console.log(userData);
-    navigate("/");
+    const res = await loginUser(formData);
+    if(res.status === 200)
+      navigate("/gallery");
+    else
+      console.log(res);
   }catch(error){
     console.log(error);
   }
@@ -64,7 +66,7 @@ async function handleSubmit(e) {
                 onChange={HandleChangeLogin}
               />
             </div>
-            <button type="submit">Submit</button>
+            <button  className="border bg-blue-500 hover:text-white">Submit</button>
           </form>
         </div>
 
