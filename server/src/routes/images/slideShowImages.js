@@ -3,8 +3,7 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 
-
-const imagesFolder = path.join(__dirname,'../..', '/images');
+const imagesFolder = path.join(__dirname, '../..', 'images');
 
 router.get('/slide_images', (req, res) => {
   fs.readdir(imagesFolder, (err, files) => {
@@ -13,8 +12,7 @@ router.get('/slide_images', (req, res) => {
       return res.status(500).send('Server error');
     }
 
-    const images = files.map(file => `http://localhost:3000/images/${file}`);
-
+    const images = files.map(file => `http://localhost:3000/images_view/${file}`);
     res.json({ images });
   });
 });

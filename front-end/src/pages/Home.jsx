@@ -1,6 +1,7 @@
 import Banner from "../components/Banner";
 import MainLayout from "../Layout/MainLayout";
 import panoramaMaslinica from "../assets/panoramaMaslinica.jpg";
+import SlideShow from "../components/SlideShow";
 
 function Home(params) {
   return (
@@ -41,6 +42,9 @@ function Home(params) {
             picnic area, this apartment offers ample opportunities to wind down.
           </p>
         </div>
+      </div>
+      <div>
+        <SlideShow></SlideShow>
       </div>
     </MainLayout>
   );
