@@ -13,9 +13,9 @@ function Home(params) {
           subTitle={"Book now for your perfect vacation"}
         />
       </div>
-      <div className="flex flex-col justify-center align-middle">
-        <h1>Relaxing stay</h1>
-        <div>
+      <div className="flex flex-col justify-center align-middle mt-52 gap-7">
+        <h1 className="text-5xl">Relaxing stay</h1>
+        <div className="flex flex-col gap-5 text-2xl m-auto w-2/3">
           <p>
             Set within 400 metres of Maslinica Beach and 500 metres of Punta
             Beach, Apartmani Mariela provides rooms with air conditioning and a
@@ -43,7 +43,7 @@ function Home(params) {
           </p>
         </div>
       </div>
-      <div>
+      <div className="w-full flex flex-col mt-60">
         <SlideShow></SlideShow>
       </div>
     </MainLayout>

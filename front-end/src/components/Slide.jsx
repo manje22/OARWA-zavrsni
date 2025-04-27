@@ -1,8 +1,9 @@
-function Slide({num, count, imgSrc}) {
+function Slide({imgSrc}) {
     return(
         <div>
-            <div>{num}/{count}</div>
             <img src={imgSrc}></img>
         </div>
     );
 }
+
+export default Slide;
