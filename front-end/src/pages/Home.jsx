@@ -2,6 +2,7 @@ import Banner from "../components/Banner";
 import MainLayout from "../Layout/MainLayout";
 import panoramaMaslinica from "../assets/panoramaMaslinica.jpg";
 import SlideShow from "../components/SlideShow";
+import Amenities from "../components/Amenities";
 
 function Home(params) {
   return (
@@ -46,6 +47,7 @@ function Home(params) {
       <div className="w-full flex flex-col mt-40 mb-40">
         <SlideShow></SlideShow>
       </div>
+      <Amenities></Amenities>
     </MainLayout>
   );
 }
