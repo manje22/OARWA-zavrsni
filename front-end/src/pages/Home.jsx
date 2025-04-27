@@ -43,7 +43,7 @@ function Home(params) {
           </p>
         </div>
       </div>
-      <div className="w-full flex flex-col mt-60">
+      <div className="w-full flex flex-col mt-40 mb-40">
         <SlideShow></SlideShow>
       </div>
     </MainLayout>
