@@ -21,7 +21,7 @@ function Amenities() {
       <h2 className="text-4xl mb-10">
         All are included at no additional cost with booking
       </h2>
-      <div className="grid grid-cols-3 gap-8 m-auto w-fit mb-50">
+      <div className="grid grid-cols-3 gap-8 m-auto w-fit mb-50 ">
         {icons.map((i) => [
           <AmenityItem
             key={i.caption}
