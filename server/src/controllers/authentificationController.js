@@ -18,14 +18,24 @@ exports.login = async (req, res) => {
 
     const userDB = await User.findOne({ email: req.body.email });
 
-    if (!userDB || await !bcrypt.compare(req.body.password, userDB.password)) {
-      return res.status(401).json({error:"Bad login information"})
+    if (
+      !userDB ||
+      (await !bcrypt.compare(req.body.password, userDB.password))
+    ) {
+      return res.status(401).json({ error: "Bad login information" });
     }
 
     const token = jwt.sign(
-      {user: userDB},
+      {
+        user: {
+          name: userDB.name,
+          surname: userDB.surname,
+          userId: userDB._id,
+          email: userDB.email,
+        },
+      },
       process.env.SECRET_KEY,
-      {expiresIn: '1h'}
+      { expiresIn: "1h" }
     );
 
     return res.json({token});
