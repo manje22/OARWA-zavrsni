@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { HandleChange } from "../utils/forms";
+import { HandleChange, validateEmail } from "../utils/forms";
 import { registerUser } from "../services/AuthServices";
 import { Link, useNavigate } from "react-router-dom";
+
 function Registration(params) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -11,12 +12,27 @@ function Registration(params) {
     password: "",
   });
 
+  const getIsFormValid = () => {
+    return (
+      formData.name &&
+      formData.surname &&
+      validateEmail(formData.email) &&
+      formData.password.length > 5
+    );
+  };
+
+
   function HandleChangeRegistration(event) {
     HandleChange(event, formData, setFormData);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!getIsFormValid)
+    {
+      alert("Krivo uneseni podaci");
+    }
 
     try {
       const res = await registerUser(formData);
@@ -48,6 +64,7 @@ function Registration(params) {
                 placeholder="Email"
                 value={formData.email}
                 onChange={HandleChangeRegistration}
+                required
               />
             </div>
 
@@ -62,6 +79,7 @@ function Registration(params) {
                 placeholder="name.."
                 value={formData.name}
                 onChange={HandleChangeRegistration}
+                required
               />
             </div>
 
@@ -76,6 +94,7 @@ function Registration(params) {
                 placeholder="surname"
                 value={formData.surname}
                 onChange={HandleChangeRegistration}
+                required
               />
             </div>
 
@@ -90,6 +109,7 @@ function Registration(params) {
                 placeholder="Password..."
                 value={formData.password}
                 onChange={HandleChangeRegistration}
+                required
               />
             </div>
             <button className="border bg-blue-500 hover:text-white">
