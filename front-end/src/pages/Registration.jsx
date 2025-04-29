@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Registration(params) {
   const navigate = useNavigate();
+  const [error, setError] = useState(); 
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -12,13 +13,30 @@ function Registration(params) {
     password: "",
   });
 
-  const getIsFormValid = () => {
-    return (
-      formData.name &&
-      formData.surname &&
-      validateEmail(formData.email) &&
-      formData.password.length > 5
-    );
+  const IsFormValid = () => {
+    const res = {error: false, message: "ok"};
+
+    if(!formData.name || !formData.password || !formData.surname){
+      res.error = true;
+      res.message = "please fill out all fields";
+      return res;
+    }
+
+    if(!formData.email || !validateEmail(formData.email))
+    {
+      res.error = true,
+      res.message = "please enter valid email";
+      return res;
+    }
+
+    if(formData.password.length < 5)
+    {
+      res.error = true,
+      res.message = "password must be at least 5 characters";
+      return res;
+    }
+
+    return res;
   };
 
 
@@ -29,17 +47,19 @@ function Registration(params) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (!getIsFormValid)
-    {
-      alert("Krivo uneseni podaci");
+    const isOk = IsFormValid();
+
+    if (isOk.error){
+      setError(isOk.message);
+      return;
     }
 
     try {
       const res = await registerUser(formData);
       if (res.status === 201 || 200)
         navigate("/login");
-      else console.log(res);
     } catch (error) {
+      setError(error.response.data);
       console.log(error);
     }
   }
@@ -61,7 +81,7 @@ function Registration(params) {
           <form onSubmit={handleSubmit} className="mt-12 flex flex-col gap-7">
             <div className="">
               <label htmlFor="email" id="email" className="">
-                Email
+                Email: 
               </label>
               <input
                 id="email"
@@ -76,7 +96,7 @@ function Registration(params) {
 
             <div>
               <label htmlFor="name" id="name">
-                Name
+                Name: 
               </label>
               <input
                 id="name"
@@ -91,7 +111,7 @@ function Registration(params) {
 
             <div>
               <label htmlFor="surname" id="surname">
-                Surname
+                Surname: 
               </label>
               <input
                 id="surname"
@@ -106,7 +126,7 @@ function Registration(params) {
 
             <div>
               <label htmlFor="password" id="password">
-                Password
+                Password: 
               </label>
               <input
                 id="password"
@@ -118,6 +138,7 @@ function Registration(params) {
                 required
               />
             </div>
+            {error != null && <div className="text-red-500">{error}</div>}
             <button className="rounded-2xl bg-blue-400 font-bold hover:bg-blue-500 text-white w-fit p-3 pt-1 pb-1 m-auto">
               Submit
             </button>
