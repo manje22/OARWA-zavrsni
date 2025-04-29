@@ -2,6 +2,7 @@ const express = require("express");
 const path = require('path');
 const app = express();
 const cors = require("cors");
+const jwt = require('jsonwebtoken');
 const authentificationRoutes = require('./routes/authentification/authentificationRoutes');
 const imageRoutes = require('./routes/images/slideShowImages');
 

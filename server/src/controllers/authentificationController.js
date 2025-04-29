@@ -1,19 +1,34 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
+
 
 require('dotenv').config();
+
 const saltRounds = Number(process.env.SALT_RUNDE);
 
 
 
 exports.login = async (req, res) => {
   try {
+    if(!req.body.email || !req.body.password)
+    {
+      return res.status(400).json({error: "All fields must be filled"});
+    }
+
     const userDB = await User.findOne({ email: req.body.email });
 
-    if (userDB && await bcrypt.compare(req.body.password, userDB.password)) {
-      return res.send('Prijava uspjesna');
+    if (!userDB || await !bcrypt.compare(req.body.password, userDB.password)) {
+      return res.status(401).json({error:"Bad login information"})
     }
-    res.status(401).send('Bad login information');
+
+    const token = jwt.sign(
+      {user: userDB},
+      process.env.SECRET_KEY,
+      {expiresIn: '1h'}
+    );
+
+    return res.json({token});
 
   } catch (error) {
     res.status(500).send(error.message);

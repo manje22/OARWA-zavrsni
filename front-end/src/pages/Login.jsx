@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {HandleChange} from "../utils/forms";
 import { loginUser } from "../services/AuthServices";
+import {jwtDecode} from 'jwt-decode';
 
 function Login(params) {
   const navigate = useNavigate();
@@ -23,7 +24,12 @@ async function handleSubmit(e) {
   try{
     const res = await loginUser(formData);
     if(res.status === 200)
+    {
+      console.log("Encoded token: ",res.data.token);
+      console.log("Decoded token: ", jwtDecode(res.data.token));
       navigate("/");
+    }
+      
   }catch(error){
     if(error.status === 401)
       setError("Incorrect username or password");
