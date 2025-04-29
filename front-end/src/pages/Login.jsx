@@ -5,6 +5,7 @@ import { loginUser } from "../services/AuthServices";
 
 function Login(params) {
   const navigate = useNavigate();
+  const [error, setError] = useState();
   const [formData, setFormData] = useState({
     "email":"",
     "password":""
@@ -22,10 +23,12 @@ async function handleSubmit(e) {
   try{
     const res = await loginUser(formData);
     if(res.status === 200)
-      navigate("/gallery");
-    else
-      console.log(res);
+      navigate("/");
   }catch(error){
+    if(error.status === 401)
+      setError("Incorrect username or password");
+    else
+      setError("Something went wrong");
     console.log(error);
   }
 }
@@ -72,7 +75,10 @@ async function handleSubmit(e) {
                 onChange={HandleChangeLogin}
               />
             </div>
-            <button className="rounded-2xl bg-blue-400 font-bold hover:bg-blue-500 text-white w-fit p-3 pt-1 pb-1 m-auto">Submit</button>
+            {error != null && <div className="text-red-500">{error}</div>}
+            <button className="rounded-2xl bg-blue-400 font-bold hover:bg-blue-500 text-white w-fit p-3 pt-1 pb-1 m-auto">
+              Submit
+            </button>
           </form>
         </div>
       </div>
