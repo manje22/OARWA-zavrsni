@@ -45,16 +45,22 @@ function Registration(params) {
   }
 
   return (
-    <div className="flex flex-row border border-solid border-gray-400 justify-around gap-7">
+    <div className="flex flex-row border border-solid border-gray-400 justify-around w-3/4 m-auto mt-72 p-10 rounded-4xl">
       <div className="">
-        <h1>Registration</h1>
+        <h1 className="mt-12 text-5xl">Registration</h1>
+        <h2 className="mt-5 text-2xl">Create your new account here</h2>
+        <div className="mt-10">
+          <Link to={"/login"} className="hover:text-blue-700 underline">
+            Already have an account?
+          </Link>
+        </div>
       </div>
 
       <div>
         <div>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="email" id="email">
+          <form onSubmit={handleSubmit} className="mt-12 flex flex-col gap-7">
+            <div className="">
+              <label htmlFor="email" id="email" className="">
                 Email
               </label>
               <input
@@ -85,7 +91,7 @@ function Registration(params) {
 
             <div>
               <label htmlFor="surname" id="surname">
-                surname
+                Surname
               </label>
               <input
                 id="surname"
@@ -112,16 +118,10 @@ function Registration(params) {
                 required
               />
             </div>
-            <button className="border bg-blue-500 hover:text-white">
+            <button className="rounded-2xl bg-blue-400 font-bold hover:bg-blue-500 text-white w-fit p-3 pt-1 pb-1 m-auto">
               Submit
             </button>
           </form>
-        </div>
-
-        <div>
-          <Link to={"/login"} className="">
-            imaš već profil?
-          </Link>
         </div>
       </div>
     </div>

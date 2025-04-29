@@ -31,14 +31,20 @@ async function handleSubmit(e) {
 }
 
   return (
-    <div className="flex flex-row border border-solid border-gray-400 justify-around gap-7">
+    <div className="flex flex-row border border-solid border-gray-400 justify-around w-3/4 m-auto mt-72 p-10 rounded-4xl">
       <div className="">
-        <h1>Log in</h1>
+        <h1 className="mt-5 text-5xl">Log in</h1>
+
+        <div className="mt-10">
+          <Link to={"/registration"} className="hover:text-blue-700 underline">
+            Don't have an account yet?
+          </Link>
+        </div>
       </div>
 
       <div>
         <div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="mt-12 flex flex-col gap-7">
             <div>
               <label htmlFor="email" id="email">
                 Email
@@ -66,14 +72,8 @@ async function handleSubmit(e) {
                 onChange={HandleChangeLogin}
               />
             </div>
-            <button  className="border bg-blue-500 hover:text-white">Submit</button>
+            <button className="rounded-2xl bg-blue-400 font-bold hover:bg-blue-500 text-white w-fit p-3 pt-1 pb-1 m-auto">Submit</button>
           </form>
-        </div>
-
-        <div>
-          <Link to={"/registration"} className="">
-            Nemaš profil?
-          </Link>
         </div>
       </div>
     </div>
