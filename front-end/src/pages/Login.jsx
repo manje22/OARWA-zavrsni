@@ -27,8 +27,6 @@ async function handleSubmit(e) {
     const res = await loginUser(formData);
     if(res.status === 200)
     {
-      console.log("Encoded token: ",res.data.token);
-      console.log("Decoded token: ", jwtDecode(res.data.token));
       setCurrentUser(jwtDecode(res.data.token));
       navigate("/");
     }
