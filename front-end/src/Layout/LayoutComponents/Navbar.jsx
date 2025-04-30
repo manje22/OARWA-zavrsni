@@ -4,6 +4,13 @@ import { UserContext } from "../../contexts/UserContext";
 
 function NavBar() {
   const { currentUser, setCurrentUser } = useContext(UserContext);
+
+
+  function LogOut(){
+    setCurrentUser(null);
+    localStorage.removeItem("token");
+  } 
+
   return (
     <div className="border-b-1 border-gray-200">
       <nav className="sticky inset-x-0 flex flex-row top-0 justify-between  p-5">
@@ -12,7 +19,8 @@ function NavBar() {
           <Link to={"/login"}>Log in</Link>
         ) : (
           <div>
-            <p>Log out</p>{" "}
+            <p>Hi {currentUser.name}</p>
+            <button onClick={LogOut}>Log out</button>
             <Link to={"/new-reservation"}>Make your reservation</Link>
           </div>
         )}

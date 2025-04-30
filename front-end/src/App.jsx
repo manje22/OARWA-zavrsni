@@ -1,19 +1,39 @@
-import { useState } from 'react'
-import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router'
-import { UserContext} from './contexts/UserContext'
-import Home from './pages/Home'
-import Gallery from './pages/Gallery'
-import Information from './pages/Information'
-import Login from './pages/Login'
-import NewReservation from './pages/NewReservation'
-import Registration from './pages/Registration'
-import Payment from './pages/Payment'
+import { useEffect, useState } from "react";
+import "./App.css";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
+import { UserContext } from "./contexts/UserContext";
+import { jwtDecode } from "jwt-decode";
+import Home from "./pages/Home";
+import Gallery from "./pages/Gallery";
+import Information from "./pages/Information";
+import Login from "./pages/Login";
+import NewReservation from "./pages/NewReservation";
+import Registration from "./pages/Registration";
+import Payment from "./pages/Payment";
+import isTokenValid from "./utils/ValidateToken";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isInitializing, setIsInitializing] = useState(true);
+
+  useEffect(() => {
+    const result = isTokenValid();
+
+    if (!result.isValid) {
+      setCurrentUser(null);
+    } else {
+      setCurrentUser(result.user);
+    }
+
+    setIsInitializing(false);
+  }, []);
+
+  if (isInitializing) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <UserContext.Provider value={{currentUser, setCurrentUser}}>
+    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -29,4 +49,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
