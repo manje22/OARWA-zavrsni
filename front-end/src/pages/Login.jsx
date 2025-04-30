@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {HandleChange} from "../utils/forms";
 import { loginUser } from "../services/AuthServices";
 import {jwtDecode} from 'jwt-decode';
+import { UserContext } from "../contexts/UserContext";
 
 function Login(params) {
   const navigate = useNavigate();
+  const {currentUser, setCurrentUser} = useContext(UserContext);
   const [error, setError] = useState();
   const [formData, setFormData] = useState({
     "email":"",
@@ -27,6 +29,7 @@ async function handleSubmit(e) {
     {
       console.log("Encoded token: ",res.data.token);
       console.log("Decoded token: ", jwtDecode(res.data.token));
+      setCurrentUser(jwtDecode(res.data.token));
       navigate("/");
     }
       
