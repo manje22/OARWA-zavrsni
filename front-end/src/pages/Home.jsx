@@ -10,7 +10,7 @@ function Home(params) {
       <div>
         <Banner
           picSrc={panoramaMaslinica}
-          title={"Apartmani Mariela"}
+          title={"Villa Daniela"}
           subTitle={"Book now for your perfect vacation"}
         />
       </div>

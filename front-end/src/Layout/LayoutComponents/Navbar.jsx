@@ -21,7 +21,7 @@ function NavBar() {
           <div>
             <p>Hi {currentUser.name}</p>
             <button onClick={LogOut}>Log out</button>
-            <Link to={"/new-reservation"}>Make your reservation</Link>
+            <Link to={"/newreservation"}>Make your reservation</Link>
           </div>
         )}
         <Link to={"/gallery"}>Gallery</Link>
