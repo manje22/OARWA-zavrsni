@@ -5,12 +5,21 @@ import { useState, useContext } from "react";
 import LoginRedirect from "../components/LoginRedirect";
 import { UserContext } from "../contexts/UserContext";
 import { HandleChange } from "../utils/forms";
+import CalendarComp from "../components/CalendarComp";
+import { format } from "date-fns/format";
+import { addDays } from "date-fns";
 
 function NewReservation(params) {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser} = useContext(UserContext);
+  const [range, setRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 7),
+      key: "selection",
+    },
+  ]);
+
   const [resFormData, setResFormData] = useState({
-    checkIn: undefined,
-    checkOut: undefined,
     numAdults: undefined,
     numChildren: undefined,
   });
@@ -29,8 +38,7 @@ function NewReservation(params) {
       <div>
         <div className="bg-blue-100 rounded-4xl w-fit m-auto p-5 mt-10 mb-10">
           <form className="flex justify-center gap-15">
-            <div>Check in:</div>
-            <div>Check out:</div>
+            <CalendarComp range={range} setRange={setRange}></CalendarComp>
             <div>
               <label htmlFor="numAdults">Adults:</label>
               <select
@@ -50,7 +58,7 @@ function NewReservation(params) {
               <label htmlFor="numChildren">Children:</label>
               <select
                 name="numChildren"
-                value={resFormData.numAdults}
+                value={resFormData.numChildren}
                 onChange={HandleChangeNewReservation}
               >
                 <option>Select</option>
@@ -72,8 +80,8 @@ function NewReservation(params) {
             <div>Your reservation details will apear here</div>
           ) : (
             <div>
-              <p>Check in: {resFormData.checkIn}</p>
-              <p>Check out: {resFormData.checkOut}</p>
+              <p>Check in: {`${format(range[0].startDate, "dd/MM/yyyy")}`}</p>
+              <p>Check in: {`${format(range[0].endDate, "dd/MM/yyyy")}`}</p>
               <p>Adults: {resFormData.numAdults}</p>
               <p>Children: {resFormData.numChildren}</p>
             </div>
