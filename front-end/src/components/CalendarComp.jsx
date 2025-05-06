@@ -20,13 +20,13 @@ function CalendarComp({ range, setRange }) {
       },
       true
     );
-    document.addEventListener(
-      "click",
-      () => {
-        if (hideOnClickOutside(refOne)) setOpen(false);
-      },
-      true
-    );
+    // document.addEventListener(
+    //   "click",
+    //   () => {
+    //     if (hideOnClickOutside(refOne)) setOpen(false);
+    //   },
+    //   true
+    // );
   }, []);
 
   return (
