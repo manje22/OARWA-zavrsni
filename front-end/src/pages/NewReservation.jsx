@@ -9,8 +9,8 @@ import CalendarComp from "../components/CalendarComp";
 import { format } from "date-fns/format";
 import { addDays } from "date-fns";
 
-function NewReservation(params) {
-  const { currentUser} = useContext(UserContext);
+function NewReservation( ) {
+  const { currentUser } = useContext(UserContext);
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -37,10 +37,10 @@ function NewReservation(params) {
       <Banner picSrc={panoramaLokacija} title={"Book your stay now"}></Banner>
       <div>
         <div className="bg-blue-100 rounded-4xl w-fit m-auto p-5 mt-10 mb-10">
-          <form className="flex justify-center gap-15">
+          <form className="flex justify-center gap-15 ">
             <CalendarComp range={range} setRange={setRange}></CalendarComp>
-            <div>
-              <label htmlFor="numAdults">Adults:</label>
+            <div className="bg-white rounded-2xl p-3 text-center hover:bg-gray-50">
+              <label htmlFor="numAdults" className="mr-2">Adults:</label>
               <select
                 name="numAdults"
                 value={resFormData.numAdults}
@@ -54,8 +54,8 @@ function NewReservation(params) {
                 ))}
               </select>
             </div>
-            <div>
-              <label htmlFor="numChildren">Children:</label>
+            <div className="bg-white rounded-2xl p-3 text-center hover:bg-gray-50">
+              <label htmlFor="numChildren" className="mr-2">Children:</label>
               <select
                 name="numChildren"
                 value={resFormData.numChildren}
@@ -70,9 +70,6 @@ function NewReservation(params) {
               </select>
             </div>
           </form>
-          <button onClick={() => console.log(resFormData)}>
-            Print res details
-          </button>
         </div>
         <div>
           <h1 className="text-4xl">Your reservation:</h1>

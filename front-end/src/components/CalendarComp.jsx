@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns/format";
-import { addDays } from "date-fns";
 import detectKey from "../utils/detectKey";
 import hideOnClickOutside from "../utils/hideOnClickOutside";
 
@@ -14,10 +13,21 @@ function CalendarComp({ range, setRange }) {
   const refOne = useRef(null);
 
   useEffect(() => {
-    document.addEventListener("keydown", () => {if (detectKey("Escape")) setOpen(false) }, true);
-    document.addEventListener("click", () => {if(hideOnClickOutside(refOne)) setOpen(false)}, true);
+    document.addEventListener(
+      "keydown",
+      () => {
+        if (detectKey("Escape")) setOpen(false);
+      },
+      true
+    );
+    document.addEventListener(
+      "click",
+      () => {
+        if (hideOnClickOutside(refOne)) setOpen(false);
+      },
+      true
+    );
   }, []);
-
 
   return (
     <div>
@@ -28,6 +38,7 @@ function CalendarComp({ range, setRange }) {
         )}`}
         readOnly
         onClick={() => setOpen((open) => !open)}
+        className="w-3xs bg-white m-auto p-3.5 rounded-2xl text-center hover:bg-gray-50"
       ></input>
 
       <div ref={refOne}>
