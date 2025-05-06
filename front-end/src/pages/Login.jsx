@@ -29,6 +29,7 @@ async function handleSubmit(e) {
     {
       const token = res.data.token;
       const decoded = jwtDecode(token);
+      console.log(decoded.user);
       setCurrentUser(decoded.user);
       localStorage.setItem("token", token);
       navigate("/");

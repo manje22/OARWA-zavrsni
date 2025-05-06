@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns/format";
+import { addDays, subDays } from "date-fns";
 import detectKey from "../utils/detectKey";
 import hideOnClickOutside from "../utils/hideOnClickOutside";
 
@@ -45,8 +46,10 @@ function CalendarComp({ range, setRange }) {
         {open && (
           <DateRange
             onChange={(item) => setRange([item.selection])}
+            minDate={new Date()}
             editableDateInputs={true}
             moveRangeOnFirstSelection={false}
+            excludeDates={[new Date(), subDays(new Date(), 1)]}
             ranges={range}
             months={2}
             direction="horizontal"

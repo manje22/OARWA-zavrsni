@@ -5,7 +5,8 @@ const rezervationSchema = new Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     checkIn: Date,
     checkOut: Date,
-    guestCount: Number,
+    numberOfAdults: Number,
+    numberOfChildren: Number,
 });
 
 

@@ -9,6 +9,7 @@ import CalendarComp from "../components/CalendarComp";
 import { format } from "date-fns/format";
 import { addDays } from "date-fns";
 import getRange from "../utils/getRange";
+import { makeNewRes } from "../services/ReservationServices";
 
 function NewReservation() {
   const { currentUser } = useContext(UserContext);
@@ -16,7 +17,7 @@ function NewReservation() {
   const [range, setRange] = useState([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), 7),
+      endDate: addDays(new Date(), 4),
       key: "selection",
     },
   ]);
@@ -32,6 +33,32 @@ function NewReservation() {
 
   function HandleChangeNewReservation(event) {
     HandleChange(event, resFormData, setResFormData);
+  }
+
+  function parseData (){
+    return({
+      user: currentUser.userId,
+      checkIn: range[0].startDate,
+      checkOut: range[0].endDate,
+      numberOfAdults: resFormData.numAdults,
+      numberOfChildren: resFormData.numChildren
+    })
+  }
+
+  async function HandleSubmit(e){
+    e.preventDefault();
+
+    console.log(range[0].startDate, range[0].endDate)
+
+    try {
+      const data = parseData()
+      const response = await makeNewRes(data);
+      if(response.status === 201 || 200)
+        alert("Res ok");
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   if (!currentUser) {
@@ -91,6 +118,11 @@ function NewReservation() {
               <p>Children: {resFormData.numChildren}</p>
             </div>
           )}
+        </div>
+        <div>
+            <button className="bg-yellow-300 rounded-2xl p-3 text-white font-bold text-xl mt-5 mb-5 hover:scale-110 transition ease-in" onClick={HandleSubmit}>
+                Submit and go to payment
+            </button>
         </div>
       </div>
     </MainLayout>

@@ -1,4 +1,4 @@
-const checkToken = (req, res, next) => {
+const tokenAuthenticaton = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     if (!authHeader) return res.status(403).send('Authentification header does not exist');
   
@@ -15,4 +15,4 @@ const checkToken = (req, res, next) => {
   };
   
 
-module.exports = authenticateToken;
+module.exports = tokenAuthenticaton;
