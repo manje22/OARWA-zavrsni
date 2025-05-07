@@ -5,13 +5,16 @@ const normalizeUTCDateToNoon = require("../utils/normalizeUTCDateToNoon");
 
 exports.getReservations = async (req, res) => {
     try {
-        const reservedDates = await reservation.find({});
+        const reservations = await reservation.find({}, "checkIn checkOut");
 
-        if (!reservedDates) {
-            return res.status(500).send("Problem getting reservations");
-        }
+        const reservedDates = reservations.map(res=>({
+            checkIn: res.checkIn.toISOString(),
+            checkOut: res.checkOut.toISOString()
+        }));
+
+        res.json(reservedDates);
     } catch (error) {
-        
+        res.status(500).json({error: "Falied to get reservations :("});
     }
 }
 
@@ -42,7 +45,7 @@ exports.newRes = async (req, res) => {
 
 
         console.log("Created new reservation", newRes);
-        
+
         await newRes.save();
         res.status(201).send("New registration successfully saved");
     } catch (error) {
