@@ -14,13 +14,13 @@ function CalendarComp({ range, setRange }) {
   const refOne = useRef(null);
 
   useEffect(() => {
-    document.addEventListener(
-      "keydown",
-      () => {
-        if (detectKey("Escape")) setOpen(false);
-      },
-      true
-    );
+    document.addEventListener("keydown", () => {if (detectKey("Escape")) setOpen(false);}, true);
+
+    fetch("http://localhost:3000/reservations/getReservations")
+    .then(res => res.json())
+    .then(data => {
+      console.log("Reserved ranges: ", data);
+    })
     // document.addEventListener(
     //   "click",
     //   () => {
