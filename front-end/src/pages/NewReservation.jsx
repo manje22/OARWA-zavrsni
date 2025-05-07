@@ -10,8 +10,11 @@ import { format } from "date-fns/format";
 import { addDays } from "date-fns";
 import getRange from "../utils/getRange";
 import { makeNewRes } from "../services/ReservationServices";
+import { useNavigate } from "react-router";
+import toUTCMidnight from "../utils/toUTCMidnight";
 
 function NewReservation() {
+  const navigate = useNavigate();
   const { currentUser } = useContext(UserContext);
   const [maxChildren, setMaxChildren] = useState(7);
   const [range, setRange] = useState([
@@ -35,30 +38,31 @@ function NewReservation() {
     HandleChange(event, resFormData, setResFormData);
   }
 
-  function parseData (){
-    return({
+  function parseData() {
+    return {
       user: currentUser.userId,
-      checkIn: range[0].startDate,
-      checkOut: range[0].endDate,
+      checkIn: toUTCMidnight(range[0].startDate).toISOString(),
+      checkOut: toUTCMidnight(range[0].endDate).toISOString(),
       numberOfAdults: resFormData.numAdults,
-      numberOfChildren: resFormData.numChildren
-    })
+      numberOfChildren: resFormData.numChildren,
+    };
   }
 
-  async function HandleSubmit(e){
+  async function HandleSubmit(e) {
     e.preventDefault();
 
-    console.log(range[0].startDate, range[0].endDate)
+    console.log(range[0].startDate, range[0].endDate);
 
     try {
-      const data = parseData()
+      const data = parseData();
       const response = await makeNewRes(data);
-      if(response.status === 201 || 200)
-        alert("Res ok");
+      if (response.status === 201 || 200) {
+        console.log("Rerouting to payment");
+        navigate("/payment");
+      }
     } catch (error) {
       console.log(error);
     }
-
   }
 
   if (!currentUser) {
@@ -120,9 +124,12 @@ function NewReservation() {
           )}
         </div>
         <div>
-            <button className="bg-yellow-300 rounded-2xl p-3 text-white font-bold text-xl mt-5 mb-5 hover:scale-110 transition ease-in" onClick={HandleSubmit}>
-                Submit and go to payment
-            </button>
+          <button
+            className="bg-yellow-300 rounded-2xl p-3 text-white font-bold text-xl mt-5 mb-5 hover:scale-110 transition ease-in"
+            onClick={HandleSubmit}
+          >
+            Submit and go to payment
+          </button>
         </div>
       </div>
     </MainLayout>

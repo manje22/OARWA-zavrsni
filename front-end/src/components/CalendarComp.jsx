@@ -49,7 +49,7 @@ function CalendarComp({ range, setRange }) {
             minDate={new Date()}
             editableDateInputs={true}
             moveRangeOnFirstSelection={false}
-            excludeDates={[new Date(), subDays(new Date(), 1)]}
+            excludeDates={[new Date()]}
             ranges={range}
             months={2}
             direction="horizontal"
