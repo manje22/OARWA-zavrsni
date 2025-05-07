@@ -1,5 +1,7 @@
 const reservation = require("../models/rezervation");
+const normalizeUTCDateToNoon = require("../utils/normalizeUTCDateToNoon");
 
+  
 
 exports.getReservations = async (req, res) => {
     try {
@@ -32,13 +34,15 @@ exports.newRes = async (req, res) => {
 
         const newRes = new reservation({
             user: resData.user,
-            checkIn: resData.checkIn,
-            checkOut: resData.checkOut,
+            checkIn: normalizeUTCDateToNoon(resData.checkIn),
+            checkOut: normalizeUTCDateToNoon(resData.checkOut),
             numberOfAdults: resData.numberOfAdults,
             numberOfChildren: resData.numberOfChildren,
         });
 
+
         console.log("Created new reservation", newRes);
+        
         await newRes.save();
         res.status(201).send("New registration successfully saved");
     } catch (error) {
