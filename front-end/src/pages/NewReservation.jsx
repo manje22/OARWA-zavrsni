@@ -17,6 +17,7 @@ function NewReservation() {
   const navigate = useNavigate();
   const { currentUser } = useContext(UserContext);
   const [maxChildren, setMaxChildren] = useState(7);
+  const [excludedDates, setExcludedDates] = useState([]);
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -57,7 +58,6 @@ function NewReservation() {
       const data = parseData();
       const response = await makeNewRes(data);
       if (response.status === 201 || 200) {
-        console.log("Rerouting to payment");
         navigate("/payment");
       }
     } catch (error) {
@@ -75,7 +75,7 @@ function NewReservation() {
       <div>
         <div className="bg-blue-100 rounded-4xl w-fit m-auto p-5 mt-10 mb-10">
           <form className="flex justify-center gap-15 ">
-            <CalendarComp range={range} setRange={setRange}></CalendarComp>
+            <CalendarComp range={range} setRange={setRange} excludedDates={excludedDates} setExcludedDates={setExcludedDates}></CalendarComp>
             <div className="bg-white rounded-2xl p-3 text-center max-h-fit hover:bg-gray-50">
               <label htmlFor="numAdults" className="mr-2">
                 Adults:
