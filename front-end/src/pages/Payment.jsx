@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { HandleChange } from "../utils/forms";
+import { Link } from "react-router";
 
 function Payment({ total }) {
   const [formData, setformData] = useState({
@@ -123,6 +124,12 @@ function Payment({ total }) {
             <p>{error}</p>
           </div>
         )}
+      </div>
+
+      <div>
+        <Link to={"/"} className="hover:text-blue-700 underline">
+          Back to home?
+        </Link>
       </div>
     </div>
   );
