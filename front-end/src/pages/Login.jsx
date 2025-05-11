@@ -32,7 +32,11 @@ async function handleSubmit(e) {
       console.log(decoded.user);
       setCurrentUser(decoded.user);
       localStorage.setItem("token", token);
-      navigate("/");
+
+      if(decoded.user.role === "admin")
+        navigate("/admin");
+      else
+        navigate("/");
     }
       
   }catch(error){
