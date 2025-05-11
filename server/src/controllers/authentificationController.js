@@ -28,6 +28,7 @@ exports.login = async (req, res) => {
           surname: userDB.surname,
           userId: userDB._id,
           email: userDB.email,
+          role: userDB.role
         },
       },
       process.env.SECRET_KEY,
@@ -50,6 +51,24 @@ exports.register = async (req, res) => {
       password: hashedPassword,
     });
     console.log("Created new user");
+    await newUser.save();
+    res.status(201).send("Registration successful");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+exports.registerNewAdmin = async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+    const newUser = new User({
+      email: req.body.email,
+      name: req.body.name,
+      surname: req.body.surname,
+      password: hashedPassword,
+      role: 'admin'
+    });
+    console.log("Created new Admin");
     await newUser.save();
     res.status(201).send("Registration successful");
   } catch (error) {

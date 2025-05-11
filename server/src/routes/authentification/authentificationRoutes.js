@@ -7,6 +7,8 @@ router.post('/login', authController.login);
 
 router.post('/register',userExists, authController.register);
 
+router.post('/registerAdmin',userExists, authController.registerNewAdmin);
+
 
 
 module.exports = router;
