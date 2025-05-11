@@ -1,10 +1,8 @@
 const checkRole = (role) => (req, res, next) => {
-  if (req.user && req.user.role === role) {
+  if (req.body && req.body.role === role) {
     next();
   } else {
-    res
-      .status(403)
-      .send(`Access forbbiden - your role is ${req.user.role} `);
+    res.status(403).send(`Access forbbiden - your role: ${req.body.role} `);
   }
 };
 
