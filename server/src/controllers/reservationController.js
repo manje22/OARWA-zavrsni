@@ -18,6 +18,16 @@ exports.getReservations = async (req, res) => {
     }
 }
 
+exports.getAllReservationInformation = async (req, res) =>{
+    try {
+        const reservations = await reservation.find();
+        console.log("Prva rezervacija: ", reservations[0]);
+        res.json(reservations)
+    } catch (error) {
+        
+    }
+}
+
 exports.newRes = async (req, res) => {
     const resData = req.body;
     try {

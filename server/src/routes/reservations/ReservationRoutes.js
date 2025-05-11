@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const reservationController = require('../../controllers/reservationController');
 const tokenAuthenticaton = require('../../middleware/tokenAuthentication');
+const checkRole = require('../../middleware/authorization');
 
 
 router.get('/getReservations', reservationController.getReservations);
 
-
+router.get('/getReservationsAdmin', reservationController.getAllReservationInformation);
 
 router.post('/newRes', reservationController.newRes);
 
