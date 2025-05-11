@@ -11,6 +11,7 @@ import NewReservation from "./pages/NewReservation";
 import Registration from "./pages/Registration";
 import Payment from "./pages/Payment";
 import isTokenValid from "./utils/ValidateToken";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -43,6 +44,7 @@ function App() {
           <Route path="/newreservation" element={<NewReservation />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/payment" element={<Payment />}></Route>
+          <Route path="/admin" element={<AdminPage/>}></Route>
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
