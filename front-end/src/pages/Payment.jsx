@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HandleChange } from "../utils/forms";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 function Payment({ total }) {
   const [formData, setformData] = useState({
@@ -13,6 +13,7 @@ function Payment({ total }) {
   const [error, setError] = useState(null);
   const currentDate = new Date();
   const currentDateYear = currentDate.getFullYear();
+  const navigate = useNavigate();
 
   function handleChangePayment(event) {
     HandleChange(event, formData, setformData);
@@ -53,7 +54,8 @@ function Payment({ total }) {
       setError("Card expired");
       return;
     }
-    alert("Payment successfull");
+    alert("Payment successfull, rerouting back to home");
+    navigate("/");
   }
   return (
     <div>
