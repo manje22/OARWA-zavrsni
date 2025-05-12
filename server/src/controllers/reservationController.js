@@ -1,7 +1,8 @@
 const reservation = require("../models/rezervation");
 const normalizeUTCDateToNoon = require("../utils/normalizeUTCDateToNoon");
+const mongoose = require("mongoose");
 
-  
+
 
 exports.getReservations = async (req, res) => {
     try {
@@ -17,6 +18,32 @@ exports.getReservations = async (req, res) => {
         res.status(500).json({error: "Falied to get reservations :("});
     }
 }
+
+
+exports.deleteReservation = async (req, res) => {
+  try {
+    const { resID } = req.body;
+    console.log("To be deleted:", resID);
+
+    // Validate the ObjectId
+    if (!mongoose.Types.ObjectId.isValid(resID)) {
+      return res.status(400).json({ error: "Invalid reservation ID" });
+    }
+
+    const resDelete = await reservation.deleteOne({
+      _id: new mongoose.Types.ObjectId(resID),
+    });
+
+    if (resDelete.deletedCount === 0) {
+      return res.status(404).json({ message: "Reservation not found" });
+    }
+
+    res.json({ message: "Reservation deleted successfully" });
+  } catch (error) {
+    console.error("Delete failed:", error);
+    res.status(500).json({ error: "Server error during deletion" });
+  }
+};
 
 exports.getAllReservationInformation = async (req, res) =>{
     try {

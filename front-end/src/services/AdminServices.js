@@ -11,9 +11,18 @@ export const GetReservations = async (currentUser) => {
 
 export const DeleteReservation = async (resID) => {
   const res = await axios.delete(
-    "http://localhost:3000/reservations/deleteReservationsAdmin",
-    currentUser
+    "http://localhost:3000/reservations/deleteReservationsAdmin",{
+      data:{resID: resID}
+    }
   );
   console.log(res);
+  
   return res.data;
+};
+
+export const DeleteAndGetNew = async (resID, currentUser) =>{
+  const deletionRes = await DeleteReservation(resID);
+  const updatedReservations = await GetReservations(currentUser);
+
+  return {deletion: deletionRes, updatedReservations: updatedReservations}
 };
