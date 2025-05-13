@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import paymentValidation from "../utils/paymentValidation";
 import { makeNewRes } from "../services/ReservationServices";
 
-function Payment({ total }) {
+function Payment() {
   const location = useLocation();
   const {reservationData} = location.state
 
@@ -44,7 +44,6 @@ function Payment({ total }) {
     <div>
       <div className="p-10">
         <h1 className="text-5xl">Payment Details</h1>
-        <p className="text-3xl mt-10 mb-16">Total: {total}</p>
       </div>
       <div>
         <form className="flex flex-col items-center gap-5 text-2xl border border-black rounded-2xl w-fit m-auto p-10">
@@ -66,7 +65,7 @@ function Payment({ total }) {
             className="border-2"
             required
           ></input>
-          <div>
+          <div className="flex gap-10">
             <input
               type="number"
               name="expMonth"
@@ -106,7 +105,7 @@ function Payment({ total }) {
         </form>
         {error && (
           <div>
-            <p>{error}</p>
+            <p className="text-red-500 border-2 w-fit m-auto mt-8 mb-8 rounded-2xl p-2 shadow-red-800 shadow-sm">{error}</p>
           </div>
         )}
       </div>

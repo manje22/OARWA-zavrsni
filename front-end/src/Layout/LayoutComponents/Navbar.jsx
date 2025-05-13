@@ -21,7 +21,7 @@ function NavBar() {
             <Link to={"/newreservation"}>Make new reservation</Link>
           </li>
           {currentUser === null ? (
-            <Link to={"/login"}>Log in</Link>
+            <Link to={"/login"} className="bg-blue-200 text-white rounded-2xl p-3 hover:bg-blue-400">Log in</Link>
           ) : (
             <LogOutButton></LogOutButton>
           )}
