@@ -1,7 +1,7 @@
 function MainFooter() {
     return (
-      <div className="left-0 bottom-0 bg-gray-100 w-full ml-0">
-        <footer className="flex flex-row justify-around gap-1.5">
+      <div className="w-full px-8 py-3 flex items-center bg-blue-50">
+        <footer className='flex justify-between items-center w-full'>
           <h1>Contact info</h1>
           <div>tel: +385 098 968 3709</div>
           <div>e-mail: apartmanimariela@gmail.com</div>

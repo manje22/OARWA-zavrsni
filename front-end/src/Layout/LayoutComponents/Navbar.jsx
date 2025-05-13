@@ -1,27 +1,33 @@
 import { useContext } from "react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
 import LogOutButton from "../../components/LogOutButton";
 
 function NavBar() {
   const { currentUser } = useContext(UserContext);
-
+  //flex justify-between items-center w-full
   return (
-    <div className="border-b-1 border-gray-200">
-      <nav className="sticky inset-x-0 flex flex-row top-0 justify-between  p-5">
-        <Link to={"/information"}>Information</Link>
-        {currentUser === null ? (
-          <Link to={"/login"}>Log in</Link>
-        ) : (
-          <div>
-            <p>Hi {currentUser.name}</p>
+    <header className="w-full px-8 py-3 shadow-sm shadow-neutral-50 flex items-center">
+      <nav className='flex justify-between items-center w-full'>
+        <Link to={"/"}>Home</Link>
+        <ul  className='flex items-center gap-8'>
+          <li>
+            <Link to={"/gallery"}>Gallery</Link>
+          </li>
+          <li>
+            <Link to={"/information"}>Information</Link>
+          </li>
+          <li>
+            <Link to={"/newreservation"}>Make new reservation</Link>
+          </li>
+          {currentUser === null ? (
+            <Link to={"/login"}>Log in</Link>
+          ) : (
             <LogOutButton></LogOutButton>
-            <Link to={"/newreservation"}>Make your reservation</Link>
-          </div>
-        )}
-        <Link to={"/gallery"}>Gallery</Link>
+          )}
+        </ul>
       </nav>
-    </div>
+    </header>
   );
 }
 
