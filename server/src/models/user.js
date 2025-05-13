@@ -1,4 +1,3 @@
-//Ovo imamo prethodno definirano
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
