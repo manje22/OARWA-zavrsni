@@ -47,11 +47,12 @@ exports.deleteReservation = async (req, res) => {
 
 exports.getAllReservationInformation = async (req, res) =>{
     try {
-        const reservations = await reservation.find();
+        const reservations = await reservation.find({}).populate('user', {name:1, surname: 1});
         console.log("Prva rezervacija: ", reservations[0]);
         res.json(reservations)
     } catch (error) {
-        
+        console.log(error);
+        res.status(500).json({error: error});
     }
 }
 

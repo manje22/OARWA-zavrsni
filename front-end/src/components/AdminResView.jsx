@@ -19,7 +19,7 @@ function AdminResView({ reservation, setReservations }) {
   return (
     <div className="flex items-center justify-center p-5 gap-16">
       <div className="flex flex-col gap-3">
-        <div>Adults: {reservation._id}</div>
+        <div>Name: {reservation.user.name + " " + reservation.user.surname}</div>
         <div>Adults: {reservation.numberOfAdults}</div>
         <div>Children:{reservation.numberOfChildren}</div>
         <div>Check in: {reservation.checkIn}</div>
