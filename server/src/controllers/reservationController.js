@@ -58,7 +58,7 @@ exports.getAllReservationInformation = async (req, res) =>{
 exports.newRes = async (req, res) => {
     const resData = req.body;
     try {
-        if (!resData.user || !resData.checkIn || !resData.checkOut || !resData.numberOfAdults || !resData.numberOfChildren) {
+        if (!resData.user||!resData.userName || !resData.checkIn || !resData.checkOut || !resData.numberOfAdults || !resData.numberOfChildren) {
             if (!resData.numberOfChildren === 0) {
                 return res.status(400).json({error: "All fields must be filled"});   
             }    
@@ -74,6 +74,7 @@ exports.newRes = async (req, res) => {
 
         const newRes = new reservation({
             user: resData.user,
+            userName: resData.userName,
             checkIn: normalizeUTCDateToNoon(resData.checkIn),
             checkOut: normalizeUTCDateToNoon(resData.checkOut),
             numberOfAdults: resData.numberOfAdults,
