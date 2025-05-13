@@ -7,9 +7,9 @@ const checkRole = require('../../middleware/authorization');
 
 router.get('/getReservations', reservationController.getReservations);
 
-router.post('/getReservationsAdmin',checkRole('admin'), reservationController.getAllReservationInformation);
+router.post('/getReservationsAdmin',tokenAuthenticaton, checkRole('admin'), reservationController.getAllReservationInformation);
 
-router.delete('/deleteReservationsAdmin',checkRole('admin'), reservationController.deleteReservation);
+router.delete('/deleteReservationsAdmin',tokenAuthenticaton, checkRole('admin'), reservationController.deleteReservation);
 
 router.post('/newRes',tokenAuthenticaton, reservationController.newRes);
 
