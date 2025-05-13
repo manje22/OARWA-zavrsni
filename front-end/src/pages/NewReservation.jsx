@@ -38,6 +38,7 @@ function NewReservation() {
     HandleChange(event, resFormData, setResFormData);
   }
 
+  //premisti u util?
   function parseData() {
     return {
       user: currentUser.userId,

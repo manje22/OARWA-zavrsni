@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { HandleChange } from "../utils/forms";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import paymentValidation from "../utils/paymentValidation";
+import { makeNewRes } from "../services/ReservationServices";
 
 function Payment({ total }) {
+  const location = useLocation();
+  const {reservationData} = location.state
+
   const [formData, setformData] = useState({
     cardNumber: "",
     cardHolder: "",
@@ -11,52 +16,31 @@ function Payment({ total }) {
     CVV: "",
   });
   const [error, setError] = useState(null);
-  const currentDate = new Date();
-  const currentDateYear = currentDate.getFullYear();
   const navigate = useNavigate();
 
   function handleChangePayment(event) {
     HandleChange(event, formData, setformData);
   }
 
-  function HandlePaymentSubmition(event) {
+  async function HandlePaymentSubmition(event) {
     event.preventDefault();
 
-    if (!formData.cardNumber) {
-      setError("Card number must be provided");
-      return;
-    }
-    if (!formData.cardHolder) {
-      setError("Card holder name must be provided");
-      return;
-    }
-    if (!formData.expMonth) {
-      setError("Month of expiration must be provided");
-      return;
-    }
-    if (!formData.expYear) {
-      setError("Year of expiration must be provided");
-      return;
-    }
+    const paymentError = paymentValidation(formData);
+    setError(paymentError);
 
-    if (!formData.CVV) {
-        setError("CVV must be provided");
-        return;
+    if (!paymentError) {
+      const response = await makeNewRes(reservationData);
+      if (response.status === 201 || 200) {
+        console.log(response);
+        alert("payment ok");
       }
+      navigate("/");
+    }
 
-    if (formData.expMonth < 1 || formData.expMonth > 12) {
-      setError("Invalid expiration month");
-      return;
-    }
-    if (formData.expYear < currentDateYear) {
-        console.log(formData.expYear);
-        console.log(currentDateYear);
-      setError("Card expired");
-      return;
-    }
-    alert("Payment successfull, rerouting back to home");
-    navigate("/");
+    return;
   }
+
+
   return (
     <div>
       <div className="p-10">
@@ -130,7 +114,7 @@ function Payment({ total }) {
 
       <div>
         <Link to={"/"} className="hover:text-blue-700 underline">
-          Back to home?
+          Cancel and back to home?
         </Link>
       </div>
     </div>

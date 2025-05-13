@@ -12,10 +12,13 @@ function AdminPage() {
   const navigate = useNavigate();
 
   const setUp = async () => {
-    const res = await GetReservations(currentUser);
-    console.log("Res from adminpage", res);
-    setReservations(res);
+    try {
+      const res = await GetReservations();
+      console.log("Res from adminpage", res);
+      setReservations(res);
+    } catch (error) {console.error("Problem loading reservations, ", error);}
   };
+  
   useEffect(() => {
     setUp();
   }, []);
