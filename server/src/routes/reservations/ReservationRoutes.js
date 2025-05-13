@@ -9,8 +9,8 @@ router.get('/getReservations', reservationController.getReservations);
 
 router.post('/getReservationsAdmin',checkRole('admin'), reservationController.getAllReservationInformation);
 
-router.delete('/deleteReservationsAdmin', reservationController.deleteReservation);
+router.delete('/deleteReservationsAdmin',checkRole('admin'), reservationController.deleteReservation);
 
-router.post('/newRes', reservationController.newRes);
+router.post('/newRes',tokenAuthenticaton, reservationController.newRes);
 
 module.exports = router;
