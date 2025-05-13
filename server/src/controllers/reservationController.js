@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 
 
-exports.getReservations = async (req, res) => {
+exports.getReservations = async (res) => {
     try {
         const reservations = await reservation.find({}, "checkIn checkOut");
 
@@ -25,7 +25,6 @@ exports.deleteReservation = async (req, res) => {
     const { resID } = req.body;
     console.log("To be deleted:", resID);
 
-    // Validate the ObjectId
     if (!mongoose.Types.ObjectId.isValid(resID)) {
       return res.status(400).json({ error: "Invalid reservation ID" });
     }
@@ -75,7 +74,6 @@ exports.newRes = async (req, res) => {
 
         const newRes = new reservation({
             user: resData.user,
-            userName: resData.userName,
             checkIn: normalizeUTCDateToNoon(resData.checkIn),
             checkOut: normalizeUTCDateToNoon(resData.checkOut),
             numberOfAdults: resData.numberOfAdults,
