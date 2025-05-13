@@ -4,7 +4,7 @@ import { UserContext } from "../../contexts/UserContext";
 import LogOutButton from "../../components/LogOutButton";
 
 function NavBar() {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
 
   return (
     <div className="border-b-1 border-gray-200">

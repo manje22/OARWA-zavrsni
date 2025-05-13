@@ -1,10 +1,9 @@
 import { useContext } from "react";
-import { DeleteAndGetNew, DeleteReservation } from "../services/AdminServices";
+import { DeleteAndGetNew } from "../services/AdminServices";
 import { UserContext } from "../contexts/UserContext";
 
-
 function AdminResView({ reservation, setReservations }) {
-    const {currentUser} = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -12,14 +11,14 @@ function AdminResView({ reservation, setReservations }) {
     const res = await DeleteAndGetNew(reservation._id, currentUser);
     setReservations(res.updatedReservations);
     console.log("Res from adminresview:", res);
-
   }
-
 
   return (
     <div className="flex items-center justify-center p-5 gap-16">
       <div className="flex flex-col gap-3">
-        <div>Name: {reservation.user.name + " " + reservation.user.surname}</div>
+        <div>
+          Name: {reservation.user.name + " " + reservation.user.surname}
+        </div>
         <div>Adults: {reservation.numberOfAdults}</div>
         <div>Children:{reservation.numberOfChildren}</div>
         <div>Check in: {reservation.checkIn}</div>

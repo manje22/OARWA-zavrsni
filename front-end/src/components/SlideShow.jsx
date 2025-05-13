@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { fetchSlideImages } from "../services/ImageServices";
 import Slide from "./Slide";
