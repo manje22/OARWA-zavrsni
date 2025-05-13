@@ -36,7 +36,6 @@ function Payment({ total }) {
       }
       navigate("/");
     }
-
     return;
   }
 

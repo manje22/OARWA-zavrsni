@@ -17,7 +17,6 @@ export const GetReservations = async () => {
     return response.data;
   } catch (error) {
     console.error("Failed to fetch reservations:", error);
-    throw error; // rethrow if caller needs to handle
   }
 };
 

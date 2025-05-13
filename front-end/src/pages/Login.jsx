@@ -7,7 +7,7 @@ import { UserContext } from "../contexts/UserContext";
 
 function Login(params) {
   const navigate = useNavigate();
-  const {currentUser, setCurrentUser} = useContext(UserContext);
+  const {setCurrentUser} = useContext(UserContext);
   const [error, setError] = useState();
   const [formData, setFormData] = useState({
     "email":"",
@@ -25,11 +25,11 @@ async function handleSubmit(e) {
 
   try{
     const res = await loginUser(formData);
+
     if(res.status === 200)
     {
       const token = res.data.token;
       const decoded = jwtDecode(token);
-      console.log(decoded.user);
       setCurrentUser(decoded.user);
       localStorage.setItem("token", token);
 

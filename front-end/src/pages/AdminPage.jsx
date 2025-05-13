@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { GetReservations } from "../services/AdminServices";
-import axios from "axios";
 import AdminResView from "../components/AdminResView";
 import LogOutButton from "../components/LogOutButton";
 import { useNavigate } from "react-router";
@@ -18,7 +17,7 @@ function AdminPage() {
       setReservations(res);
     } catch (error) {console.error("Problem loading reservations, ", error);}
   };
-  
+
   useEffect(() => {
     setUp();
   }, []);
