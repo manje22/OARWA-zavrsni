@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { HandleChange, validateEmail } from "../utils/forms";
+import { HandleChange} from "../utils/forms";
 import { registerUser } from "../services/AuthServices";
 import { Link, useNavigate } from "react-router-dom";
+import isRegistrationFormValid from "../utils/isRegistrationFormValid";
 
 function Registration(params) {
   const navigate = useNavigate();
@@ -13,32 +14,6 @@ function Registration(params) {
     password: "",
   });
 
-  const IsFormValid = () => {
-    const res = {error: false, message: "ok"};
-
-    if(!formData.name || !formData.password || !formData.surname){
-      res.error = true;
-      res.message = "please fill out all fields";
-      return res;
-    }
-
-    if(!formData.email || !validateEmail(formData.email))
-    {
-      res.error = true,
-      res.message = "please enter valid email";
-      return res;
-    }
-
-    if(formData.password.length < 5)
-    {
-      res.error = true,
-      res.message = "password must be at least 5 characters";
-      return res;
-    }
-
-    return res;
-  };
-
 
   function HandleChangeRegistration(event) {
     HandleChange(event, formData, setFormData);
@@ -47,7 +22,7 @@ function Registration(params) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const isOk = IsFormValid();
+    const isOk = isRegistrationFormValid(formData);
 
     if (isOk.error){
       setError(isOk.message);
