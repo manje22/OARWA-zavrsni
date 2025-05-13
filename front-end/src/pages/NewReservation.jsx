@@ -12,6 +12,7 @@ import getRange from "../utils/getRange";
 import { makeNewRes } from "../services/ReservationServices";
 import { useNavigate } from "react-router";
 import toUTCMidnight from "../utils/toUTCMidnight";
+import calculateNumDays from "../utils/CalculateNumDays";
 
 function NewReservation() {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ function NewReservation() {
   function parseData() {
     return {
       user: currentUser.userId,
+      userName: currentUser.name + " " + currentUser.surname,
       checkIn: toUTCMidnight(range[0].startDate).toISOString(),
       checkOut: toUTCMidnight(range[0].endDate).toISOString(),
       numberOfAdults: resFormData.numAdults,
@@ -53,6 +55,7 @@ function NewReservation() {
     e.preventDefault();
 
     console.log(range[0].startDate, range[0].endDate);
+    console.log("Num days: ", calculateNumDays(range[0].startDate, range[0].endDate));
 
     try {
       const data = parseData();
@@ -60,6 +63,8 @@ function NewReservation() {
       if (response.status === 201 || 200) {
         navigate("/payment");
       }
+      //if validate input ok:
+      navigate("/payment");
     } catch (error) {
       console.log(error);
     }
@@ -120,6 +125,7 @@ function NewReservation() {
               <p>Check in: {`${format(range[0].endDate, "dd/MM/yyyy")}`}</p>
               <p>Adults: {resFormData.numAdults}</p>
               <p>Children: {resFormData.numChildren}</p>
+              <p>Price: {calculateNumDays(range[0].startDate, range[0].endDate)*115}€</p>
             </div>
           )}
         </div>
