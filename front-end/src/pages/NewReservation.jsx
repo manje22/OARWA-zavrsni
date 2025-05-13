@@ -6,13 +6,11 @@ import LoginRedirect from "../components/LoginRedirect";
 import { UserContext } from "../contexts/UserContext";
 import { HandleChange } from "../utils/forms";
 import CalendarComp from "../components/CalendarComp";
-import { format } from "date-fns/format";
 import { addDays } from "date-fns";
 import getRange from "../utils/getRange";
-import { makeNewRes } from "../services/ReservationServices";
 import { useNavigate } from "react-router";
 import toUTCMidnight from "../utils/toUTCMidnight";
-import calculateNumDays from "../utils/CalculateNumDays";
+import ReservationDetails from "../components/ReservationDetails";
 
 function NewReservation() {
   const navigate = useNavigate();
@@ -54,17 +52,9 @@ function NewReservation() {
   async function HandleSubmit(e) {
     e.preventDefault();
 
-    console.log(range[0].startDate, range[0].endDate);
-    console.log("Num days: ", calculateNumDays(range[0].startDate, range[0].endDate));
-
     try {
       const data = parseData();
-      const response = await makeNewRes(data);
-      if (response.status === 201 || 200) {
-        navigate("/payment");
-      }
-      //if validate input ok:
-      navigate("/payment");
+      navigate("/payment", {state: {reservationData: data}});
     } catch (error) {
       console.log(error);
     }
@@ -120,13 +110,8 @@ function NewReservation() {
           {Object.values(resFormData).every((el) => el === undefined) ? (
             <div>Your reservation details will apear here</div>
           ) : (
-            <div>
-              <p>Check in: {`${format(range[0].startDate, "dd/MM/yyyy")}`}</p>
-              <p>Check in: {`${format(range[0].endDate, "dd/MM/yyyy")}`}</p>
-              <p>Adults: {resFormData.numAdults}</p>
-              <p>Children: {resFormData.numChildren}</p>
-              <p>Price: {calculateNumDays(range[0].startDate, range[0].endDate)*115}€</p>
-            </div>
+            //stavi ovo u zasebnu komp
+            <ReservationDetails range={range} resFormData={resFormData}></ReservationDetails>
           )}
         </div>
         <div>
