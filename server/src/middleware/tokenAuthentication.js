@@ -10,7 +10,7 @@ const tokenAuthenticaton = (req, res, next) => {
 
   try {
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-    req.user = decodedToken;
+    req.user = decodedToken.user;
   } catch (err) {
     console.error("Token verification error:", err.message);
     return res.status(401).send("Invalid Token");
