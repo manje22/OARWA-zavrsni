@@ -38,7 +38,7 @@ export default function paymentValidation(formData) {
       return "Card expired";
     }
 
-    if (formData.CVV.length ==! 3 ) {
+    if (formData.CVV.length < 3 || formData.CVV.length >3 ) {
         return "invalid CVV";
     }
 
