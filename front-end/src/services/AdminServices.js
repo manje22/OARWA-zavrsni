@@ -1,28 +1,44 @@
 import axios from "axios";
 
-export const GetReservations = async (currentUser) => {
-  const res = await axios.post(
-    "http://localhost:3000/reservations/getReservationsAdmin",
-    currentUser
-  );
-  console.log(res);
-  return res.data;
+
+export const GetReservations = async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:3000/reservations/getReservationsAdmin",
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("Fetched reservations:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch reservations:", error);
+    throw error; // rethrow if caller needs to handle
+  }
 };
 
 export const DeleteReservation = async (resID) => {
   const res = await axios.delete(
-    "http://localhost:3000/reservations/deleteReservationsAdmin",{
-      data:{resID: resID}
+    "http://localhost:3000/reservations/deleteReservationsAdmin",
+    {
+      data: { resID: resID },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     }
   );
+
   console.log(res);
-  
   return res.data;
 };
 
-export const DeleteAndGetNew = async (resID, currentUser) =>{
+export const DeleteAndGetNew = async (resID, currentUser) => {
   const deletionRes = await DeleteReservation(resID);
   const updatedReservations = await GetReservations(currentUser);
 
-  return {deletion: deletionRes, updatedReservations: updatedReservations}
+  return { deletion: deletionRes, updatedReservations: updatedReservations };
 };
