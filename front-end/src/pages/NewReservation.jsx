@@ -105,8 +105,8 @@ function NewReservation() {
             </div>
           </form>
         </div>
-        <div>
-          <h1 className="text-4xl">Your reservation:</h1>
+        <div className="w-fit p-5 m-auto rounded-2xl bg-amber-50 shadow-md">
+          <h1 className="text-4xl mb-5">Your reservation:</h1>
           {Object.values(resFormData).every((el) => el === undefined) ? (
             <div>Your reservation details will apear here</div>
           ) : (

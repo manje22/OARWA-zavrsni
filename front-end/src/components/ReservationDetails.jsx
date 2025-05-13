@@ -3,7 +3,7 @@ import calculateNumDays from "../utils/CalculateNumDays";
 
 function ReservationDetails({ range, resFormData }) {
   return (
-    <div>
+    <div className="flex flex-col gap-1 text-2xl">
       <p>Check in: {`${format(range[0].startDate, "dd/MM/yyyy")}`}</p>
       <p>Check in: {`${format(range[0].endDate, "dd/MM/yyyy")}`}</p>
       <p>Adults: {resFormData.numAdults}</p>

@@ -33,9 +33,13 @@ function AdminPage() {
 
   return (
     <div>
-      <LogOutButton></LogOutButton>
-      <h1>Reservation management</h1>
-      <div className="m-auto">
+      <header className="flex justify-between p-4 shadow-md">
+        <h1 className="text-3xl font-bold">Reservation management</h1>
+        <LogOutButton></LogOutButton>
+      </header>
+      
+     
+      <div className="grid grid-cols-3 gap-5 mt-15">
         {reservations.map((r) => [
           <AdminResView reservation={r}  setReservations={setReservations} key={r._id} />,
         ])}

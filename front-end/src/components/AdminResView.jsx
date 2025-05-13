@@ -14,7 +14,7 @@ function AdminResView({ reservation, setReservations }) {
   }
 
   return (
-    <div className="flex items-center justify-center p-5 gap-16">
+    <div className="flex items-center justify-center p-5 gap-16 border-2 w-fit rounded-2xl hover:scale-120 bg-white">
       <div className="flex flex-col gap-3">
         <div>
           Name: {reservation.user.name + " " + reservation.user.surname}

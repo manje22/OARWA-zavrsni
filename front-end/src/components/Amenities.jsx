@@ -17,7 +17,7 @@ function Amenities() {
   ];
   return (
     <div>
-      <h1 className="text-6xl mb-5">Amenities we offer at our apartments</h1>
+      <h1 className="text-6xl mb-5">Amenities we offer at our villa</h1>
       <h2 className="text-4xl mb-10">
         All are included at no additional cost with booking
       </h2>

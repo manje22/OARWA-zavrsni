@@ -19,7 +19,7 @@ function Home(params) {
         <div className="flex flex-col gap-5 text-2xl m-auto w-2/3">
           <p>
             Set within 400 metres of Maslinica Beach and 500 metres of Punta
-            Beach, Apartmani Mariela provides rooms with air conditioning and a
+            Beach, villa Daniela provides rooms with air conditioning and a
             private bathroom in Maslinica. With sea views, this accommodation
             offers a balcony and a swimming pool. There is a sun terrace and
             guests can make use of free WiFi, free private parking and an
@@ -30,7 +30,7 @@ function Home(params) {
             kitchen with a microwave, a dining area, a flat-screen TV with
             satellite channels, and a private bathroom with walk-in shower and a
             hair dryer. A toaster, a fridge and stovetop are also offered, as
-            well as a coffee machine and a kettle. At the apartment complex,
+            well as a coffee machine and a kettle. At the villa,
             units come with bed linen and towels.
           </p>
           <p>
@@ -39,8 +39,8 @@ function Home(params) {
           </p>
           <p>
             The area is popular for cycling and hiking, and bike hire is
-            available at this 3-star apartment. With an outdoor fireplace and a
-            picnic area, this apartment offers ample opportunities to wind down.
+            available at this 4-star villa. With an outdoor fireplace and a
+            picnic area, this villa offers ample opportunities to wind down.
           </p>
         </div>
       </div>
