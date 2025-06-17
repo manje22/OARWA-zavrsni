@@ -4,6 +4,7 @@ import panoramaMaslinica from "../assets/panoramaMaslinica.jpg";
 import SlideShow from "../components/SlideShow";
 import Amenities from "../components/Amenities";
 
+
 function Home(params) {
   return (
     <MainLayout>

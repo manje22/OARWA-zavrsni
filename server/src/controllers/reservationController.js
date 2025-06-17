@@ -14,6 +14,7 @@ exports.getReservations = async (req, res) => {
         }));
 
         res.json(reservedDates);
+        console.log("reserved dates: ", reservedDates);
     } catch (error) {
         res.status(500).json({error: "Falied to get reservations :("});
     }
@@ -74,6 +75,7 @@ exports.newRes = async (req, res) => {
 
         const newRes = new reservation({
             user: resData.user,
+            userName: resData.userName,
             checkIn: normalizeUTCDateToNoon(resData.checkIn),
             checkOut: normalizeUTCDateToNoon(resData.checkOut),
             numberOfAdults: resData.numberOfAdults,

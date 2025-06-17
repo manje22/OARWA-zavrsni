@@ -51,7 +51,7 @@ function NewReservation() {
 
   async function HandleSubmit(e) {
     e.preventDefault();
-
+    console.log(currentUser);
     try {
       const data = parseData();
       navigate("/payment", {state: {reservationData: data}});

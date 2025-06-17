@@ -5,7 +5,6 @@ import LogOutButton from "../../components/LogOutButton";
 
 function NavBar() {
   const { currentUser } = useContext(UserContext);
-  //flex justify-between items-center w-full
   return (
     <header className="w-full px-8 py-3 shadow-sm shadow-neutral-50 flex items-center">
       <nav className='flex justify-between items-center w-full'>

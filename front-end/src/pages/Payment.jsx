@@ -6,8 +6,8 @@ import { makeNewRes } from "../services/ReservationServices";
 
 function Payment() {
   const location = useLocation();
-  const {reservationData} = location.state
-
+  const {reservationData} = location.state;
+  console.log("res data: ", reservationData);
   const [formData, setformData] = useState({
     cardNumber: "",
     cardHolder: "",

@@ -6,8 +6,9 @@ import makeLightBoxCompatible from "../utils/makeLightBoxCompatible";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import ImageGallery from "./ImageGallery";
+
 function LightBoxComp() {
-  const[index, setIndex] = useState(-1);
+  const [index, setIndex] = useState(-1);
   const [slides, setSlides] = useState([]);
   const [isInitializing, setIsInitializing] = useState(true);
 
