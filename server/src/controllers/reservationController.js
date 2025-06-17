@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 
 
-exports.getReservations = async (res) => {
+exports.getReservations = async (req, res) => {
     try {
         const reservations = await reservation.find({}, "checkIn checkOut");
 
