@@ -11,6 +11,7 @@ import getRange from "../utils/getRange";
 import { useNavigate } from "react-router";
 import toUTCMidnight from "../utils/toUTCMidnight";
 import ReservationDetails from "../components/ReservationDetails";
+import ReservationConfirmationPopUp from "../components/ReservationConfirmationPopUp";
 
 function NewReservation() {
   const navigate = useNavigate();
@@ -114,13 +115,14 @@ function NewReservation() {
             <ReservationDetails range={range} resFormData={resFormData} className="w-full"></ReservationDetails>
           )}
         </div>
-        <div>
-          <button
+        <div className="m-auto w-fit">
+          {/* <button
             className="bg-yellow-300 rounded-2xl p-3 text-white font-bold text-xl mt-5 mb-5 hover:scale-110 transition ease-in"
             onClick={HandleSubmit}
           >
             Submit and go to payment
-          </button>
+          </button> */}
+          <ReservationConfirmationPopUp handleSubmit={HandleSubmit}></ReservationConfirmationPopUp>
         </div>
       </div>
     </MainLayout>

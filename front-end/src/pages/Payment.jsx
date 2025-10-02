@@ -3,118 +3,36 @@ import { HandleChange } from "../utils/forms";
 import { Link, useLocation, useNavigate } from "react-router";
 import paymentValidation from "../utils/paymentValidation";
 import { makeNewRes } from "../services/ReservationServices";
+import MainLayout from "../Layout/MainLayout";
+import StudioAli from "../assets/StudioAli.jpg";
 
 function Payment() {
   const location = useLocation();
-  const {reservationData} = location.state;
+  const { reservationData } = location.state;
   console.log("res data: ", reservationData);
-  const [formData, setformData] = useState({
-    cardNumber: "",
-    cardHolder: "",
-    expMonth: "",
-    expYear: "",
-    CVV: "",
-  });
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-
-  function handleChangePayment(event) {
-    HandleChange(event, formData, setformData);
-  }
-
-  async function HandlePaymentSubmition(event) {
-    event.preventDefault();
-
-    const paymentError = paymentValidation(formData);
-    setError(paymentError);
-
-    if (!paymentError) {
-      const response = await makeNewRes(reservationData);
-      if (response.status === 201 || 200) {
-        console.log(response);
-        alert("payment ok");
-      }
-      navigate("/");
-    }
-    return;
-  }
-
 
   return (
     <div>
-      <div className="p-10">
-        <h1 className="text-5xl">Payment Details</h1>
-      </div>
-      <div>
-        <form className="flex flex-col items-center gap-5 text-2xl border border-black rounded-2xl w-fit m-auto p-10">
-          <input
-            type="text"
-            name="cardNumber"
-            placeholder="CARD NUMBER"
-            value={formData.cardNumber}
-            onChange={handleChangePayment}
-            className="border-2"
-            required
-          ></input>
-          <input
-            type="text"
-            name="cardHolder"
-            placeholder="CARD HOLDER"
-            value={formData.cardHolder}
-            onChange={handleChangePayment}
-            className="border-2"
-            required
-          ></input>
-          <div className="flex gap-10">
-            <input
-              type="number"
-              name="expMonth"
-              placeholder="MM"
-              value={formData.expMonth}
-              onChange={handleChangePayment}
-              className="border-2"
-              required
-            ></input>
-            <input
-              type="number"
-              name="expYear"
-              placeholder="YY"
-              value={formData.expYear}
-              onChange={handleChangePayment}
-              className="border-2"
-              required
-            ></input>
+      <MainLayout>
+        <div
+          className="w-full h-screen bg-cover bg-center relative"
+          style={{ backgroundImage: `url(${StudioAli})` }}
+        >
+          <div className="absolute inset-0 bg-opacity-30 flex flex-col justify-center items-center text-white">
+            <h1 className="text-8xl font-bold">Your reservation is booked</h1>
+            <div className="bg-white bg-opacity-90 rounded-2xl p-50 m-10 text-black">
+              <p>Your reservation is successfully booked!</p>
+              <p>An email has been sent to you containing the details of your reservation</p>
+              <br></br>
+              <p>You have 7 days to pay the deposit or your reservation will automatically be canceled</p>
+              <p>Payment details are located here</p>
+              <br></br>
+              <p>If you have any questions or concerns feel free to contact us</p>
+              <p>We look forward to seeing you!</p>
+            </div>
           </div>
-          <input
-            type="number"
-            name="CVV"
-            placeholder="CVV"
-            value={formData.CVV}
-            onChange={handleChangePayment}
-            className="border-2"
-            required
-          ></input>
-          <div>
-            <button
-              onClick={HandlePaymentSubmition}
-              className="bg-blue-300 rounded-3xl p-3 text-white hover:bg-blue-400"
-            >
-              Submit payment
-            </button>
-          </div>
-        </form>
-        {error && (
-          <div>
-            <p className="text-red-500 border-2 w-fit m-auto mt-8 mb-8 rounded-2xl p-2 shadow-red-800 shadow-sm">{error}</p>
-          </div>
-        )}
-      </div>
-
-      <div>
-        <Link to={"/"} className="hover:text-blue-700 underline">
-          Cancel and back to home?
-        </Link>
-      </div>
+        </div>
+      </MainLayout>
     </div>
   );
 }
