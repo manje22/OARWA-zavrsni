@@ -9,5 +9,5 @@ const PORT = 3000;
 
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT} ♡(>ᴗ•)`);
+  console.log(`Server running on port ${PORT}`);
 });

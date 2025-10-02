@@ -4,6 +4,6 @@ const normalizeUTCDateToNoon = (dateString) => {
     return d;
 }
 
-//ovo je za oni problem s vremenskim zonama
+
 
 module.exports = normalizeUTCDateToNoon;
