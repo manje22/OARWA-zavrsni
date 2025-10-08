@@ -116,12 +116,6 @@ function NewReservation() {
           )}
         </div>
         <div className="m-auto w-fit">
-          {/* <button
-            className="bg-yellow-300 rounded-2xl p-3 text-white font-bold text-xl mt-5 mb-5 hover:scale-110 transition ease-in"
-            onClick={HandleSubmit}
-          >
-            Submit and go to payment
-          </button> */}
           <ReservationConfirmationPopUp handleSubmit={HandleSubmit}></ReservationConfirmationPopUp>
         </div>
       </div>

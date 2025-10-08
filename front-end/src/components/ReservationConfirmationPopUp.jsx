@@ -2,6 +2,7 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 function ReservationConfirmationPopUp({handleSubmit}) {
+
   return (
     <div className="w-fit bg-yellow-300 rounded-2xl p-3 text-white font-bold text-xl mt-5 mb-5 hover:scale-110 transition ease-in">
       <Popup trigger={<button> Submit your reservation </button>} modal nested>
