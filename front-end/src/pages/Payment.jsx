@@ -5,10 +5,22 @@ import paymentValidation from "../utils/paymentValidation";
 import { makeNewRes } from "../services/ReservationServices";
 import MainLayout from "../Layout/MainLayout";
 import StudioAli from "../assets/StudioAli.jpg";
+import { useEffect } from "react";
 
 function Payment() {
   const location = useLocation();
   const { reservationData } = location.state;
+
+  useEffect(() => {
+    makeNewRes(reservationData)
+      .then((res) => {
+        console.log("Uspjesno spremljeno: " + res);
+      })
+      .catch((err) => {
+        console.log("Greška prilikom spremanja: " + err);
+      });
+  });
+
   console.log("res data: ", reservationData);
 
   return (
