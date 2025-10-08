@@ -58,6 +58,12 @@ async function handleSubmit(e) {
             Don't have an account yet?
           </Link>
         </div>
+
+        <div className="mt-5">
+          <Link to={"/"} className="hover:text-blue-700 underline">
+            Go back to home page
+          </Link>
+        </div>
       </div>
 
       <div>
