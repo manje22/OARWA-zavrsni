@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 connectDB();
 
-const PORT = 3000; //ovo dodajen kao taji kljuc u env
+const PORT = process.env.PORT; //ovo dodajen kao taji kljuc u env
 
 
 app.listen(PORT, () => {
