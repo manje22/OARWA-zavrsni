@@ -21,7 +21,7 @@ function CalendarComp({ range, setRange, excludedDates, setExcludedDates }) {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:3000/reservations/getReservations")
+    fetch(process.env.SERVER_URL+"/reservations/getReservations")
       .then((res) => res.json())
       .then((data) => {
         //console.log(data);
