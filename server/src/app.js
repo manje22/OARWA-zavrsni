@@ -17,5 +17,5 @@ app.use('/images', imageRoutes);
 
 app.use('/images_view', express.static(path.join(__dirname, 'images')));
 
-console.log("App is running");
+//console.log("App is running");
 module.exports = app;

@@ -14,7 +14,6 @@ exports.getReservations = async (req, res) => {
         }));
 
         res.json(reservedDates);
-        console.log("reserved dates: ", reservedDates);
     } catch (error) {
         res.status(500).json({error: "Falied to get reservations :("});
     }
@@ -24,8 +23,6 @@ exports.getReservations = async (req, res) => {
 exports.deleteReservation = async (req, res) => {
   try {
     const { resID } = req.body;
-    console.log("To be deleted:", resID);
-
     if (!mongoose.Types.ObjectId.isValid(resID)) {
       return res.status(400).json({ error: "Invalid reservation ID" });
     }
@@ -40,7 +37,7 @@ exports.deleteReservation = async (req, res) => {
 
     res.json({ message: "Reservation deleted successfully" });
   } catch (error) {
-    console.error("Delete failed:", error);
+    //console.error("Delete failed:", error);
     res.status(500).json({ error: "Server error during deletion" });
   }
 };
@@ -48,10 +45,10 @@ exports.deleteReservation = async (req, res) => {
 exports.getAllReservationInformation = async (req, res) =>{
     try {
         const reservations = await reservation.find({}).populate('user', {name:1, surname: 1});
-        console.log("Prva rezervacija: ", reservations[0]);
+        //console.log("Prva rezervacija: ", reservations[0]);
         res.json(reservations)
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         res.status(500).json({error: error});
     }
 }
@@ -73,20 +70,44 @@ exports.newRes = async (req, res) => {
             return res.status(400).json({error: "Number of adult guests must be greater than one and no more than eight"});
         }
 
+        const normalizedCheckIn = normalizeUTCDateToNoon(resData.checkIn);
+        const normalizedCheckOut = normalizeUTCDateToNoon(resData.checkOut);
+
+        // Check for an existing reservation for same user and exact dates
+        const existing = await reservation.findOne({
+            user: resData.user,
+            checkIn: normalizedCheckIn,
+            checkOut: normalizedCheckOut,
+        });
+
+        if (existing) {
+            return res.status(200).json({ message: 'Reservation already exists', id: existing._id });
+        }
+
         const newRes = new reservation({
             user: resData.user,
             userName: resData.userName,
-            checkIn: normalizeUTCDateToNoon(resData.checkIn),
-            checkOut: normalizeUTCDateToNoon(resData.checkOut),
+            checkIn: normalizedCheckIn,
+            checkOut: normalizedCheckOut,
             numberOfAdults: resData.numberOfAdults,
             numberOfChildren: resData.numberOfChildren,
         });
 
-
-        console.log("Created new reservation", newRes);
-
-        await newRes.save();
-        res.status(201).send("New registration successfully saved");
+        try {
+            await newRes.save();
+            res.status(201).json({ message: 'New reservation saved', id: newRes._id });
+        } catch (err) {
+            // Handle rare race condition where duplicate insert may occur
+            if (err.code === 11000) {
+                const dup = await reservation.findOne({
+                    user: resData.user,
+                    checkIn: normalizedCheckIn,
+                    checkOut: normalizedCheckOut,
+                });
+                return res.status(200).json({ message: 'Reservation already exists', id: dup?._id });
+            }
+            throw err;
+        }
     } catch (error) {
         res.status(500).send(error.message);
     }

@@ -11,7 +11,7 @@ function SlideShow() {
       const res = await fetchSlideImages();
       setImgs(res.images);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
 

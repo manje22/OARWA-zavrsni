@@ -24,11 +24,11 @@ function CalendarComp({ range, setRange, excludedDates, setExcludedDates }) {
     fetch("http://localhost:3000/reservations/getReservations")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         const reserved = getDateRanges(data);
         setExcludedDates(reserved);
       })
-      .catch((err) => console.error("Failed to fetch reservations:", err));
+      //.catch((err) => console.error("Failed to fetch reservations:", err));
   }, []);
 
   const handleSelect = (item) => {

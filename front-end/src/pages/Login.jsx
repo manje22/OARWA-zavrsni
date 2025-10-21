@@ -44,7 +44,7 @@ async function handleSubmit(e) {
       setError("Incorrect username or password");
     else
       setError("Something went wrong");
-    console.log(error);
+    //console.log(error);
   }
 }
 

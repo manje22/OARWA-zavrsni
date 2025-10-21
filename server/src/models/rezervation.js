@@ -10,5 +10,8 @@ const rezervationSchema = new Schema({
     numberOfChildren: Number,
 });
 
+// Prevent duplicate reservations for the same user and exact dates
+rezervationSchema.index({ user: 1, checkIn: 1, checkOut: 1 }, { unique: true });
+
 
 module.exports = mongoose.model('rezervation', rezervationSchema);

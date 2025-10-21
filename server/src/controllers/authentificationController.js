@@ -48,7 +48,7 @@ exports.register = async (req, res) => {
       surname: req.body.surname,
       password: hashedPassword,
     });
-    console.log("Created new user");
+    //console.log("Created new user");
     await newUser.save();
     res.status(201).send("Registration successful");
   } catch (error) {
@@ -66,7 +66,7 @@ exports.registerNewAdmin = async (req, res) => {
       password: hashedPassword,
       role: 'admin'
     });
-    console.log("Created new Admin");
+    //console.log("Created new Admin");
     await newUser.save();
     res.status(201).send("Registration successful");
   } catch (error) {

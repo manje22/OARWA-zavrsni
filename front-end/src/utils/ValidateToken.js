@@ -16,7 +16,7 @@ export default function isTokenValid() {
         return {isValid: false, user:null};
     }
   } catch (error) {
-    console.log("Invalid token: ", error);
+    //console.log("Invalid token: ", error);
     localStorage.removeItem("token");
     return { isValid: false, user: null };
   }

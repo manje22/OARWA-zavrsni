@@ -33,8 +33,8 @@ export default function paymentValidation(formData) {
     }
 
     if (formData.expYear < currentDateYear) {
-        console.log(formData.expYear);
-        console.log(currentDateYear);
+        //console.log(formData.expYear);
+        //console.log(currentDateYear);
       return "Card expired";
     }
 

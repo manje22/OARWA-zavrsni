@@ -8,7 +8,7 @@ const imagesFolder = path.join(__dirname, '../..', 'images');
 router.get('/slide_images', (req, res) => {
   fs.readdir(imagesFolder, (err, files) => {
     if (err) {
-      console.error("Error reading images folder:", err);
+      //console.error("Error reading images folder:", err);
       return res.status(500).send('Server error');
     }
 

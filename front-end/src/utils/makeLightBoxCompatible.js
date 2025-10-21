@@ -7,6 +7,6 @@ export default function makeLightBoxCompatible(imgs){
         compatible.push(compatibleElement);
     }
 
-    console.log(compatible);
+    //console.log(compatible);
     return compatible;
 }

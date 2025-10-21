@@ -10,7 +10,7 @@ function AdminResView({ reservation, setReservations }) {
 
     const res = await DeleteAndGetNew(reservation._id, currentUser);
     setReservations(res.updatedReservations);
-    console.log("Res from adminresview:", res);
+    //console.log("Res from adminresview:", res);
   }
 
   return (

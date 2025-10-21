@@ -1,27 +1,53 @@
-import { useState } from "react";
-import { HandleChange } from "../utils/forms";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
-import paymentValidation from "../utils/paymentValidation";
 import { makeNewRes } from "../services/ReservationServices";
 import MainLayout from "../Layout/MainLayout";
 import StudioAli from "../assets/StudioAli.jpg";
-import { useEffect } from "react";
 
 function Payment() {
   const location = useLocation();
-  const { reservationData } = location.state;
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const [hasReservationData, setHasReservationData] = useState(!!location.state?.reservationData);
 
   useEffect(() => {
-    makeNewRes(reservationData)
-      .then((res) => {
-        console.log("Uspjesno spremljeno: " + res);
-      })
-      .catch((err) => {
-        console.log("Greška prilikom spremanja: " + err);
-      });
-  });
+    // Check if we have valid reservation data
+    if (!hasReservationData) {
+      navigate('/');
+      return;
+    }
 
-  console.log("res data: ", reservationData);
+    const { checkIn, checkOut } = location.state.reservationData;
+    const reservationKey = `reservation_${checkIn}_${checkOut}`;
+    const inProgressKey = `${reservationKey}_inprogress`;
+
+    const isAlreadySubmitted = localStorage.getItem(reservationKey);
+    const isInProgress = localStorage.getItem(inProgressKey);
+
+    // If already submitted, do nothing. If another tab or render is in-progress, skip too.
+    if (isAlreadySubmitted) return;
+    if (isInProgress) return;
+
+    try {
+      localStorage.setItem(inProgressKey, 'true');
+      makeNewRes(location.state.reservationData)
+        .then(() => {
+          localStorage.setItem(reservationKey, 'true');
+        })
+        .catch((err) => {
+          setError(err.message);
+          // keep the in-progress flag for a short time? we'll clear it below
+        })
+        .finally(() => {
+          localStorage.removeItem(inProgressKey);
+        });
+    } catch (err) {
+      // Fallback cleanup
+      localStorage.removeItem(inProgressKey);
+      setError(err.message || 'Unknown error');
+      navigate('/');
+    }
+  }, [hasReservationData, navigate]);
 
   return (
     <div>

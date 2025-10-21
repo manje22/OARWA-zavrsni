@@ -35,7 +35,7 @@ function Registration(params) {
         navigate("/login");
     } catch (error) {
       setError(error.response.data);
-      console.log(error);
+      //console.log(error);
     }
   }
 

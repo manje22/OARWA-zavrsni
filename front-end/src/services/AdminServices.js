@@ -13,10 +13,10 @@ export const GetReservations = async () => {
       }
     );
 
-    console.log("Fetched reservations:", response.data);
+    //console.log("Fetched reservations:", response.data);
     return response.data;
   } catch (error) {
-    console.error("Failed to fetch reservations:", error);
+    //console.error("Failed to fetch reservations:", error);
   }
 };
 
@@ -31,7 +31,7 @@ export const DeleteReservation = async (resID) => {
     }
   );
 
-  console.log(res);
+  //console.log(res);
   return res.data;
 };
 

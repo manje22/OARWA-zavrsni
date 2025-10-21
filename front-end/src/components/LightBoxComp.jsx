@@ -18,7 +18,7 @@ function LightBoxComp() {
       const compatibleRes = makeLightBoxCompatible(res.images);
       setSlides(compatibleRes);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
 

@@ -1,5 +1,5 @@
 const checkRole = (role) => (req, res, next) => {
-  console.log("Req from auth middleware", req.user);
+  //console.log("Req from auth middleware", req.user);
   if (req.user && req.user.role === role) {
     next();
   } else {
