@@ -5,6 +5,8 @@ const path = require('path');
 
 const imagesFolder = path.join(__dirname, '../..', 'images');
 
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+
 router.get('/slide_images', (req, res) => {
   fs.readdir(imagesFolder, (err, files) => {
     if (err) {
