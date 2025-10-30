@@ -12,7 +12,7 @@ router.get('/slide_images', (req, res) => {
       return res.status(500).send('Server error');
     }
 
-    const images = files.map(file => `${BASE_URL}/images_view/${file}`);
+    const images = files.map(file => `${BASE_URL}/images/${file}`);
     res.json({ images });
   });
 });
