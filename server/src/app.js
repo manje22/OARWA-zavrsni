@@ -8,7 +8,13 @@ const imageRoutes = require('./routes/images/slideShowImages');
 
 
 // Middleware
-app.use(cors());
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+app.use(cors({
+    origin: FRONTEND_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
+
 app.use(express.json());
 
 app.use('/', authentificationRoutes);
