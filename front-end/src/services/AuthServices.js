@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const loginUser = async (data) => {
   const res = await axios.post(
-    `${import.meta.env.SERVER_URL}/login`,
+    `${import.meta.env.VITE_API_URL}/login`,
     data,
     {
       headers: { "Content-Type": "application/json" },
