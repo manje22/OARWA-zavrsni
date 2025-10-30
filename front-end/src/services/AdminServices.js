@@ -4,7 +4,7 @@ import axios from "axios";
 export const GetReservations = async () => {
   try {
     const response = await axios.get(
-      process.env.SERVER_URL+"/reservations/getReservationsAdmin",
+      `${import.meta.env.SERVER_URL}/reservations/getReservationsAdmin`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -22,7 +22,7 @@ export const GetReservations = async () => {
 
 export const DeleteReservation = async (resID) => {
   const res = await axios.delete(
-    process.env.SERVER_URL+"/reservations/deleteReservationsAdmin",
+    `${import.meta.env.SERVER_URL}/reservations/deleteReservationsAdmin`,
     {
       data: { resID: resID },
       headers: {
